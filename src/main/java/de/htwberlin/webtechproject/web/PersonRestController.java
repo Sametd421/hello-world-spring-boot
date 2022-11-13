@@ -1,5 +1,6 @@
 package de.htwberlin.webtechproject.web;
 
+import de.htwberlin.webtechproject.web.api.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
