@@ -1,28 +1,18 @@
 package de.htwberlin.webtechproject.web.api;
 
-public class Person {
+public class PersonManipulationRequest {
 
-    private long id;
     private String firstName;
     private String lastName;
 
     private String gender;
     private boolean vaccinated;
 
-    public Person(long id, String firstName, String lastName, String gender, boolean vaccinated) {
-        this.id = id;
+    public PersonManipulationRequest(String firstName, String lastName, String gender, boolean vaccinated) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
         this.gender = gender;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.vaccinated = vaccinated;
     }
 
     public String getFirstName() {
