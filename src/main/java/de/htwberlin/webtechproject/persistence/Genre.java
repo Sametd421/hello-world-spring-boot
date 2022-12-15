@@ -1,6 +1,6 @@
 package de.htwberlin.webtechproject.persistence;
 
-public enum Gender {
+public enum Genre {
     FEMALE,
     MALE,
     DIVERSE,
