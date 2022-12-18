@@ -15,6 +15,8 @@ public class GameManipulationRequest {
         this.finished = finished;
     }
 
+
+    public GameManipulationRequest() {}
     public String getTitle() {
         return title;
     }
