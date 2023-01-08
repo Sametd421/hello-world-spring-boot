@@ -1,5 +1,6 @@
 package de.htwberlin.webtechproject.service;
 
+import de.htwberlin.webtechproject.persistence.Console;
 import de.htwberlin.webtechproject.persistence.Genre;
 import de.htwberlin.webtechproject.persistence.GameEntity;
 import de.htwberlin.webtechproject.persistence.GameRepository;
@@ -7,11 +8,13 @@ import de.htwberlin.webtechproject.web.api.Game;
 import de.htwberlin.webtechproject.web.api.GameManipulationRequest;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GameService {
+
     private final GameRepository gameRepository;
 
     public GameService(GameRepository gameRepository){
@@ -32,7 +35,8 @@ public class GameService {
 
     public Game create(GameManipulationRequest request){
         var genre = Genre.valueOf(request.getGenre());
-        var gameEntity = new GameEntity(request.getTitle(), request.getLastName(), request.isFinished(), genre);
+        var console = Console.valueOf(request.getConsole());
+        var gameEntity = new GameEntity(request.getTitle(), console, request.getReleaseYear(), request.getStartDate(), request.getFinished(), request.getFavorised(), request.getComment(), genre);
         gameEntity = gameRepository.save(gameEntity);
         return transformEntity(gameEntity);
     }
@@ -46,8 +50,12 @@ public class GameService {
 
         var gameEntity = gameEntityOptional.get();
         gameEntity.setTitle(request.getTitle());
-        gameEntity.setLastName(request.getLastName());
-        gameEntity.setFinished(request.isFinished());
+        gameEntity.setConsole(Console.valueOf(request.getConsole()));
+        gameEntity.setReleaseYear(request.getReleaseYear());
+        gameEntity.setStartDate(request.getStartDate());
+        gameEntity.setFinished(request.getFinished());
+        gameEntity.setFavorised(request.getFavorised());
+        gameEntity.setComment(request.getComment());
         gameEntity.setGenre(Genre.valueOf(request.getGenre()));
         gameEntity = gameRepository.save(gameEntity);
 
@@ -63,13 +71,16 @@ public class GameService {
     }
 
     private Game transformEntity(GameEntity gameEntity) {
-        var genre = gameEntity.getGenre() != null ? gameEntity.getGenre().name() : Genre.UNKNOWN.name();
         return new Game(
                 gameEntity.getId(),
                 gameEntity.getTitle(),
-                gameEntity.getLastName(),
-                genre,
-                gameEntity.getFinished()
+                gameEntity.getConsole() != null ? gameEntity.getConsole().name() : "PlayStation",
+                gameEntity.getReleaseYear(),
+                gameEntity.getStartDate(),
+                gameEntity.getFinished(),
+                gameEntity.getFavorised(),
+                gameEntity.getComment(),
+                gameEntity.getGenre() != null ? gameEntity.getGenre().name() : "ACTION"
         );
     }
 }

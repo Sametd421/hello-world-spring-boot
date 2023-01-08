@@ -1,18 +1,29 @@
 package de.htwberlin.webtechproject.web.api;
 
+import de.htwberlin.webtechproject.persistence.Console;
+import de.htwberlin.webtechproject.persistence.Genre;
+
 public class Game {
 
     private long id;
     private String title;
-    private String lastName;
-    private String genre;
+    private String console;
+    private int releaseYear;
+    private String startDate;
     private boolean finished;
+    private boolean favorised;
+    private String comment;
+    private String genre;
 
-    public Game(long id, String title, String lastName, String genre, boolean finished) {
+    public Game(long id, String title, String console, int releaseYear, String startDate, Boolean finished, boolean favorised, String comment, String genre) {
         this.id = id;
         this.title = title;
-        this.lastName = lastName;
+        this.console = console;
+        this.releaseYear = releaseYear;
+        this.startDate = startDate;
         this.finished = finished;
+        this.favorised = favorised;
+        this.comment = comment;
         this.genre = genre;
     }
 
@@ -28,26 +39,55 @@ public class Game {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String firstName) {
+        this.title = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getConsole() {
+        return console;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setConsole(String console) {
+        this.console = console;
     }
 
-    public boolean isFinished() {
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public Boolean getFinished() {
         return finished;
     }
 
-    public void setFinished(boolean finished) {
+    public void setFinished(Boolean finished) {
         this.finished = finished;
     }
 
+    public boolean getFavorised() {
+        return favorised;
+    }
+
+    public void setFavorised(boolean favorised) {
+        this.favorised = favorised;
+    }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
     public String getGenre() {
         return genre;
     }
@@ -55,4 +95,5 @@ public class Game {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
 }
